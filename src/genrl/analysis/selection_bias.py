@@ -12,7 +12,6 @@ from dataclasses import dataclass
 import numpy as np
 from scipy import integrate, stats
 
-
 # --- Predictions -------------------------------------------------------------
 
 
@@ -25,7 +24,7 @@ def expected_max_std_normal(K: int) -> float:
     """E[max of K i.i.d. standard normals]."""
     if K == 1:
         return 0.0
-    f = lambda z: z * K * stats.norm.pdf(z) * stats.norm.cdf(z) ** (K - 1)  # noqa: E731
+    f = lambda z: z * K * stats.norm.pdf(z) * stats.norm.cdf(z) ** (K - 1)
     return integrate.quad(f, -np.inf, np.inf)[0]
 
 
@@ -104,7 +103,7 @@ def split_simulation(c_bar: np.ndarray, n: int, n_reps: int = 1000, seed: int = 
     c_bar: (K, N) per-problem mean correctness on the split half of the pool.
     """
     rng = np.random.default_rng(seed)
-    K, N = c_bar.shape
+    N = c_bar.shape[1]
     _check_n(n, N)
     pool = c_bar.mean(axis=1)
     selected = np.empty(n_reps, dtype=int)

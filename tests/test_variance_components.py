@@ -18,7 +18,7 @@ def _simulate(S, n, R, sa, sb, sg, rng):
 
 def test_anova_estimators_unbiased():
     rng = np.random.default_rng(0)
-    truth = dict(sa=0.05, sb=0.3, sg=0.1)
+    truth = {"sa": 0.05, "sb": 0.3, "sg": 0.1}
     est = [estimate_components(_simulate(5, 300, 4, **truth, rng=rng)) for _ in range(300)]
     assert abs(np.mean([e.sampling for e in est]) - 0.25) < 0.005
     assert abs(np.mean([e.interaction for e in est]) - 0.01) < 0.003
