@@ -27,3 +27,6 @@ results/figures/*
 .vscode/
 .idea/
 .DS_Store
+results/part_a/
+results/part_b/
+results/handcheck.csv
