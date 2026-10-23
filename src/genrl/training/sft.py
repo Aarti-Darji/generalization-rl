@@ -43,7 +43,7 @@ def train_sft(cfg: dict) -> None:
         learning_rate=cfg["learning_rate"],
         per_device_train_batch_size=cfg["per_device_train_batch_size"],
         gradient_accumulation_steps=cfg["gradient_accumulation_steps"],
-        warmup_ratio=cfg["warmup_ratio"],
+        warmup_steps=cfg["warmup_steps"],
         lr_scheduler_type=cfg["lr_scheduler_type"],
         logging_steps=cfg["logging_steps"],
         save_strategy=cfg["save_strategy"],
