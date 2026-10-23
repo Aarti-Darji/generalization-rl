@@ -61,3 +61,10 @@ def test_selection_rules_shapes():
     out = sb.selection_rules(c_bar, seeds, steps, n=50, n_reps=50)
     assert set(out) == {"per_run_argmax", "last", "mean_last3", "argmax_mean_curve"}
     assert out["per_run_argmax"]["selection"] >= out["per_run_argmax"]["oracle"]
+
+
+def test_split_simulation_rejects_empty_oracle():
+    import pytest
+
+    with pytest.raises(ValueError):
+        sb.split_simulation(np.zeros((3, 50)), n=50)

@@ -88,6 +88,11 @@ class SplitResult:
         return float(np.mean(self.sel_score - self.pool_score))
 
 
+def _check_n(n: int, N: int) -> None:
+    if not 0 < n < N:
+        raise ValueError(f"selection size n={n} must leave an oracle set (pool has {N})")
+
+
 def _argmax_random_ties(x: np.ndarray, rng: np.random.Generator) -> int:
     best = np.flatnonzero(x == x.max())
     return int(rng.choice(best))
@@ -100,6 +105,7 @@ def split_simulation(c_bar: np.ndarray, n: int, n_reps: int = 1000, seed: int = 
     """
     rng = np.random.default_rng(seed)
     K, N = c_bar.shape
+    _check_n(n, N)
     pool = c_bar.mean(axis=1)
     selected = np.empty(n_reps, dtype=int)
     sel = np.empty(n_reps)
@@ -127,6 +133,7 @@ def selection_rules(
     """
     rng = np.random.default_rng(seed)
     N = c_bar.shape[1]
+    _check_n(n, N)
     uniq_seeds = np.unique(seeds)
     uniq_steps = np.unique(steps)
     out: dict[str, list[tuple[float, float]]] = {
