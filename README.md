@@ -52,6 +52,7 @@ pip install -e ".[train]"        # adds torch, trl, vllm for training / sampling
 
 pytest                            # unit tests
 python scripts/synthetic_check.py # reproduce the synthetic sanity check of the math
+python scripts/make_fake_log.py   # fake log with the real schema, to try the analyses
 
 python scripts/run_sft.py  --config configs/sft/gsm8k.yaml
 python scripts/run_grpo.py --config configs/grpo/gsm8k.yaml --seed 0
@@ -65,3 +66,10 @@ python scripts/part_b.py --log results/logs/samples.parquet
 ## Status
 
 Starter code. Week-by-week plan in the proposal.
+
+- [ ] Week 1: eval harness, hand-check 100 graded samples, base / instruct baselines
+- [ ] Week 2: SFT and first GRPO seed
+- [ ] Week 3: remaining seeds, evaluate all checkpoints
+- [ ] Week 4: Part A analysis
+- [ ] Week 5: Part B analysis, non-Qwen check (stretch)
+- [ ] Week 6: write-up
