@@ -13,17 +13,20 @@ def _gsm8k_to_messages(solution: str) -> str:
 
 
 def build_sft_dataset(name: str):
+    """Conversational prompt/completion rows, so the loss covers only the answer."""
     from datasets import Dataset
 
     problems = load_problems(name)
     return Dataset.from_list(
         [
             {
-                "messages": [
+                "prompt": [
                     {"role": "system", "content": SYSTEM_PROMPT},
                     {"role": "user", "content": p.question},
+                ],
+                "completion": [
                     {"role": "assistant", "content": _gsm8k_to_messages(p.solution)},
-                ]
+                ],
             }
             for p in problems
         ]
@@ -45,6 +48,7 @@ def train_sft(cfg: dict) -> None:
         logging_steps=cfg["logging_steps"],
         save_strategy=cfg["save_strategy"],
         report_to=cfg["report_to"],
+        completion_only_loss=True,  # mask system + question tokens out of the loss
         bf16=True,
     )
     trainer = SFTTrainer(
