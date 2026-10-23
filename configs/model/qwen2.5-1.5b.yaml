@@ -1,0 +1,6 @@
+# Base model. Swap for Qwen/Qwen2.5-0.5B, Qwen/Qwen3-1.7B, or a non-Qwen
+# check such as meta-llama/Llama-3.2-1B-Instruct.
+name_or_path: Qwen/Qwen2.5-1.5B
+dtype: bfloat16
+max_prompt_length: 512
+max_completion_length: 768
