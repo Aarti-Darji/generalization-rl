@@ -1,0 +1,19 @@
+# GRPO from the SFT model. Seeds change only the random state
+# (data order, sampling), never the data or hyperparameters.
+model: outputs/sft/gsm8k
+output_dir: outputs/grpo        # seed is appended: outputs/grpo/seed{N}
+dataset: gsm8k
+seeds: [0, 1, 2, 3, 4]
+max_steps: 500
+save_steps: 25                  # ~20 checkpoints per seed -> K ~ 100 over 5 seeds
+learning_rate: 1.0e-6
+per_device_train_batch_size: 8
+gradient_accumulation_steps: 4
+num_generations: 8
+temperature: 0.7
+max_prompt_length: 512
+max_completion_length: 768
+beta: 0.04                      # KL coefficient
+use_vllm: true
+logging_steps: 5
+report_to: wandb
