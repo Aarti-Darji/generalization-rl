@@ -37,7 +37,6 @@ def train_grpo(cfg: dict, seed: int) -> Path:
         gradient_accumulation_steps=cfg["gradient_accumulation_steps"],
         num_generations=cfg["num_generations"],
         temperature=cfg["temperature"],
-        max_prompt_length=cfg["max_prompt_length"],
         max_completion_length=cfg["max_completion_length"],
         beta=cfg["beta"],
         use_vllm=cfg["use_vllm"],
