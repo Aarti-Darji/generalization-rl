@@ -40,6 +40,8 @@ def train_grpo(cfg: dict, seed: int) -> Path:
         max_completion_length=cfg["max_completion_length"],
         beta=cfg["beta"],
         use_vllm=cfg["use_vllm"],
+        vllm_mode=cfg["vllm_mode"],
+        vllm_gpu_memory_utilization=cfg["vllm_gpu_memory_utilization"],
         logging_steps=cfg["logging_steps"],
         report_to=cfg["report_to"],
         run_name=f"grpo-seed{seed}",
